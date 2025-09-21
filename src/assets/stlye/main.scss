@@ -1,0 +1,18 @@
+// setup
+@import "./setup/vars";
+@import "./setup/mixins";
+@import "./setup/functions";
+
+// base
+@import "./base/reset";
+@import "./base/layout";
+@import "./base/helpers";
+@import "./base/base";
+
+// pages
+@import "./pages/CrudlEdit";
+@import "./pages/CurdlDetails";
+
+//cmps
+@import "./cmps/crudl/CrudlList";
+@import "./cmps/AppHeader";

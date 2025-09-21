@@ -1,0 +1,16 @@
+.crudl-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1em;
+
+    margin-block-end: 1em;
+
+    .object-item {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: 4 span;
+        gap: 0.4em;
+        padding: 1em;
+        outline: 2px solid black;
+    }
+}
