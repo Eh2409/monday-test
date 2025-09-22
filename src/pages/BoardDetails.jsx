@@ -61,6 +61,34 @@ export function BoardDetails(props) {
         }))
     }
 
+    function onAddTask(taskName, groupId) {
+        const group = board.groups.find(g => g.id === groupId)
+        if (!group) return console.log(`group ${groupId} not found`)
+
+        var columnValues = []
+        if (group.items.length > 0 && group.items[0].columnValues.length) {
+            const itemColumnValues = group.items[0].columnValues
+            for (const key in itemColumnValues) {
+                if (key === 'value') {
+                    itemColumnValues[key] = ''
+                }
+            }
+        }
+
+        const newTask = boardService.getEmptyTask(taskName, columnValues)
+        console.log('newTask:', newTask)
+
+        setPrevBoard(board)
+        setBoard(prev => ({
+            ...prev,
+            groups: prev.groups.map(g => {
+                if (g.id === groupId) {
+                    return { ...g, items: [...g.items, newTask] }
+                }
+                return g
+            })
+        }))
+    }
 
 
     if (!board) return 'loading....'
@@ -76,6 +104,7 @@ export function BoardDetails(props) {
                     key={group.id}
                     group={group}
                     saveGroupTitle={saveGroupTitle}
+                    onAddTask={onAddTask}
                 />
             ))}
         </div>

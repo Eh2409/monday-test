@@ -1,6 +1,7 @@
 import { GroupTitleEditor } from "./group/GroupTitleEditor.jsx"
+import { TaskNameEditor } from "./group/TaskNameEditor.jsx"
 
-export function Group({ group, saveGroupTitle }) {
+export function Group({ group, saveGroupTitle, onAddTask }) {
 
     const columns = group.items[0]?.columnValues.map(col => col.id) || []
 
@@ -30,6 +31,12 @@ export function Group({ group, saveGroupTitle }) {
                         ))}
                     </div>
                 ))}
+
+                <div className="table-row">
+                    <div className="cell add-task">
+                        <TaskNameEditor placeholder={"+ Add task"} onSave={(taskName) => onAddTask(taskName, group.id)} />
+                    </div>
+                </div>
             </div>
         </section>
     )
