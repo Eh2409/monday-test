@@ -4,9 +4,10 @@ import { store } from "./store/store.js";
 
 // pages
 import { HomePage } from "./pages/HomePage";
-import { CrudlIndex } from "./pages/CrudlIndex";
-import { CrudleDetails } from "./pages/CrudleDetails.jsx";
-import { CrudleEdit } from "./pages/CrudleEdit.jsx";
+import { BoardIndex } from "./pages/BoardIndex.jsx";
+// import { CrudlIndex } from "./pages/CrudlIndex";
+// import { CrudleDetails } from "./pages/CrudleDetails.jsx";
+// import { CrudleEdit } from "./pages/CrudleEdit.jsx";
 
 //cmps
 import { AppHeader } from "./cmps/AppHeader";
@@ -20,10 +21,10 @@ export function RootCmp(props) {
                     <main >
                         <Routes>
                             <Route path="/" element={<HomePage />} />
-                            <Route path="/index" element={<CrudlIndex />} />
-                            <Route path="/index/:objectId" element={<CrudleDetails />} />
+                            <Route path="/board" element={<BoardIndex />} />
+                            {/* <Route path="/index/:objectId" element={<CrudleDetails />} />
                             <Route path="/index/edit" element={<CrudleEdit />} />
-                            <Route path="/index/edit/:objectId" element={<CrudleEdit />} />
+                            <Route path="/index/edit/:objectId" element={<CrudleEdit />} /> */}
                         </Routes>
                     </main>
                 </section>

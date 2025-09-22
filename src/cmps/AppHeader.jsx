@@ -6,7 +6,7 @@ export function AppHeader(props) {
             <Link to=""> <h1>Monday test</h1></Link>
             <nav className="main-app-nav">
                 <NavLink to="">Home</NavLink>
-                <NavLink to="/index">Index</NavLink>
+                <NavLink to="/board">Boards</NavLink>
             </nav>
         </header>
     )
