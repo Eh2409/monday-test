@@ -5,6 +5,7 @@ import { store } from "./store/store.js";
 // pages
 import { HomePage } from "./pages/HomePage";
 import { BoardIndex } from "./pages/BoardIndex.jsx";
+import { BoardDetails } from "./pages/BoardDetails.jsx";
 // import { CrudlIndex } from "./pages/CrudlIndex";
 // import { CrudleDetails } from "./pages/CrudleDetails.jsx";
 // import { CrudleEdit } from "./pages/CrudleEdit.jsx";
@@ -22,6 +23,7 @@ export function RootCmp(props) {
                         <Routes>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/board" element={<BoardIndex />} />
+                            <Route path="/board/:boardId" element={<BoardDetails />} />
                             {/* <Route path="/index/:objectId" element={<CrudleDetails />} />
                             <Route path="/index/edit" element={<CrudleEdit />} />
                             <Route path="/index/edit/:objectId" element={<CrudleEdit />} /> */}

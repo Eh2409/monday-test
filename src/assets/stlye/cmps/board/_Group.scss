@@ -1,0 +1,49 @@
+.group {
+    margin-block-end: 1em;
+
+    .group-header {
+        margin-block-end: 0.5em;
+    }
+
+    .group-table {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #d0d4e4;
+        border-radius: 10px;
+        overflow-y: hidden;
+
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 10px 300px 100px 200px 150px repeat(auto-fill, minmax(100px, 1fr)) 100%;
+            align-items: center;
+            border-block-end: 1px solid #d0d4e4;
+
+            &::before {
+                content: '';
+                width: 10px;
+                height: 100%;
+                background: gray;
+
+            }
+
+            &:last-of-type {
+                border-block-end: none;
+            }
+
+            &.table-header {
+                text-align: center;
+                text-transform: capitalize;
+            }
+
+            .cell {
+                position: relative;
+                padding: 8px 12px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                border-inline-end: 1px solid #d0d4e4;
+            }
+        }
+    }
+}

@@ -68,8 +68,8 @@ function _createBoard() {
                         id: makeId(),
                         name: makeLorem(3),
                         columnValues: [
-                            { id: 'status', value: 'Working on it' },
-                            { id: 'person', value: 'Eliad' },
+                            { id: 'owner', value: 'Eliad', },
+                            { id: 'status', value: 'Working on it', color: '' },
                             { id: 'date', value: '2025-09-22' }
                         ]
                     },
@@ -77,9 +77,9 @@ function _createBoard() {
                         id: makeId(),
                         name: makeLorem(3),
                         columnValues: [
-                            { id: 'status', value: 'Working on it' },
-                            { id: 'person', value: 'Eliad' },
-                            { id: 'date', value: '2025-09-22' }
+                            { id: 'owner', value: 'Eliad', },
+                            { id: 'status', value: 'Working on it', color: '' },
+                            { id: 'due date', value: '2025-09-22' }
                         ]
                     }
                 ]
@@ -93,18 +93,18 @@ function _createBoard() {
                         id: makeId(),
                         name: makeLorem(3),
                         columnValues: [
-                            { id: 'status', value: 'Working on it' },
-                            { id: 'person', value: 'Eliad' },
-                            { id: 'date', value: '2025-09-22' }
+                            { id: 'owner', value: 'Eliad', },
+                            { id: 'status', value: 'Working on it', color: '' },
+                            { id: 'due date', value: '2025-09-22' }
                         ]
                     },
                     {
                         id: makeId(),
                         name: makeLorem(3),
                         columnValues: [
-                            { id: 'status', value: 'Working on it' },
-                            { id: 'person', value: 'Eliad' },
-                            { id: 'date', value: '2025-09-22' }
+                            { id: 'owner', value: 'Eliad', },
+                            { id: 'status', value: 'Working on it', color: '' },
+                            { id: 'due date', value: '2025-09-22' }
                         ]
                     }
                 ]
@@ -112,3 +112,5 @@ function _createBoard() {
         ]
     }
 }
+
+
