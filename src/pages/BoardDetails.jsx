@@ -12,12 +12,19 @@ export function BoardDetails(props) {
     const { boardId } = params
 
     const [board, setBoard] = useState(null)
+    const [prevBoard, setPrevBoard] = useState(null)
 
     useEffect(() => {
         if (boardId) {
             getBoard(boardId)
         }
     }, [])
+
+    useEffect(() => {
+        if (prevBoard) {
+            saveBoard()
+        }
+    }, [board])
 
 
     async function getBoard(boardId) {
@@ -29,6 +36,33 @@ export function BoardDetails(props) {
         }
     }
 
+    async function saveBoard() {
+        try {
+            await boardService.save(board)
+        } catch (err) {
+            console.log('err:', err)
+            setBoard(prevBoard)
+        }
+    }
+
+
+    function saveGroupTitle(dataToSave, groupId) {
+        const { title, color } = dataToSave
+
+        setPrevBoard(board)
+        setBoard(prev => ({
+            ...prev,
+            groups: prev.groups.map(g => {
+                if (g.id === groupId) {
+                    return { ...g, title: title, color: color }
+                }
+                return g
+            })
+        }))
+    }
+
+
+
     if (!board) return 'loading....'
     return (
         <div className="board-details">
@@ -38,7 +72,11 @@ export function BoardDetails(props) {
             </header>
 
             {board.groups.map(group => (
-                <Group key={group.id} group={group} />
+                <Group
+                    key={group.id}
+                    group={group}
+                    saveGroupTitle={saveGroupTitle}
+                />
             ))}
         </div>
     )

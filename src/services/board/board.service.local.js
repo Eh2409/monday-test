@@ -29,7 +29,6 @@ async function remove(boardId) {
 }
 
 async function save(board) {
-
     if (board?._id) {
         return await storageService.put(BOARD_KEY, board)
     } else {
@@ -62,7 +61,7 @@ function _createBoard() {
             {
                 id: makeId(),
                 title: makeLorem(3),
-                color: '',
+                color: '#000000',
                 items: [
                     {
                         id: makeId(),
@@ -87,7 +86,7 @@ function _createBoard() {
             {
                 id: makeId(),
                 title: makeLorem(3),
-                color: '',
+                color: '#000000',
                 items: [
                     {
                         id: makeId(),

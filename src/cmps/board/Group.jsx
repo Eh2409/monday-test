@@ -1,12 +1,18 @@
-export function Group({ group }) {
+import { GroupTitleEditor } from "./group/GroupTitleEditor.jsx"
+
+export function Group({ group, saveGroupTitle }) {
 
     const columns = group.items[0]?.columnValues.map(col => col.id) || []
 
     return (
-        <section className="group">
+        <section className="group" style={{ '--before-columns': group.color }}>
 
             <div className="group-header">
-                <h3>{group.title}</h3>
+                <GroupTitleEditor
+                    title={group.title}
+                    color={group.color}
+                    onSave={((dataToSave) => saveGroupTitle(dataToSave, group.id))}
+                />
             </div>
             <div className="group-table">
                 <div className="table-row table-header">
@@ -18,7 +24,7 @@ export function Group({ group }) {
 
                 {group.items.map(item => (
                     <div key={item.id} className="table-row">
-                        <div className="cell name">{item.name}</div>
+                        <div className="cell">{item.name}</div>
                         {item.columnValues.map(col => (
                             <div key={col.id} className="cell">{col.value}</div>
                         ))}
