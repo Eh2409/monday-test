@@ -67,16 +67,20 @@ export function BoardDetails(props) {
 
         var columnValues = []
         if (group.items.length > 0 && group.items[0].columnValues.length) {
-            const itemColumnValues = group.items[0].columnValues
-            for (const key in itemColumnValues) {
-                if (key === 'value') {
-                    itemColumnValues[key] = ''
+            const itemColumnValues = structuredClone(group.items[0].columnValues)
+            columnValues = itemColumnValues.map(cv => {
+                if (cv.id === 'status') {
+                    cv.value = 'not started'
+                    cv.color = 'gray'
+                } else {
+                    cv.value = ''
                 }
-            }
+                return cv
+            })
         }
 
         const newTask = boardService.getEmptyTask(taskName, columnValues)
-
+        console.log('newTask:', newTask)
         setPrevBoard(board)
         setBoard(prev => ({
             ...prev,

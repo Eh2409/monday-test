@@ -21,7 +21,7 @@ function getEmptyTask(taskName, columnValues) {
 function getEmptyColumnValues() {
     return [
         { id: 'owner', value: '', },
-        { id: 'status', value: '', color: '' },
+        { id: 'status', value: 'not started', color: 'gray' },
         { id: 'due date', value: '' }
     ]
 }
