@@ -1,7 +1,7 @@
 import { GroupTitleEditor } from "./group/GroupTitleEditor.jsx"
 import { TaskNameEditor } from "./group/TaskNameEditor.jsx"
 
-export function Group({ group, saveGroupTitle, onAddTask }) {
+export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName }) {
 
     const columns = group.items[0]?.columnValues.map(col => col.id) || []
 
@@ -25,7 +25,10 @@ export function Group({ group, saveGroupTitle, onAddTask }) {
 
                 {group.items.map(item => (
                     <div key={item.id} className="table-row">
-                        <div className="cell">{item.name}</div>
+                        <div className="cell">
+                            <TaskNameEditor name={item.name}
+                                onSave={(taskName) => onUpdateTaskName(taskName, group.id, item.id)} />
+                        </div>
                         {item.columnValues.map(col => (
                             <div key={col.id} className="cell">{col.value}</div>
                         ))}

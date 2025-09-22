@@ -76,7 +76,6 @@ export function BoardDetails(props) {
         }
 
         const newTask = boardService.getEmptyTask(taskName, columnValues)
-        console.log('newTask:', newTask)
 
         setPrevBoard(board)
         setBoard(prev => ({
@@ -84,6 +83,26 @@ export function BoardDetails(props) {
             groups: prev.groups.map(g => {
                 if (g.id === groupId) {
                     return { ...g, items: [...g.items, newTask] }
+                }
+                return g
+            })
+        }))
+    }
+
+    function onUpdateTaskName(taskName, groupId, itemId) {
+        setPrevBoard(board)
+        setBoard(prev => ({
+            ...prev,
+            groups: prev.groups.map(g => {
+                if (g.id === groupId) {
+                    return {
+                        ...g, items: g.items.map(item => {
+                            if (item.id === itemId) {
+                                return { ...item, name: taskName }
+                            }
+                            return item
+                        })
+                    }
                 }
                 return g
             })
@@ -105,6 +124,7 @@ export function BoardDetails(props) {
                     group={group}
                     saveGroupTitle={saveGroupTitle}
                     onAddTask={onAddTask}
+                    onUpdateTaskName={onUpdateTaskName}
                 />
             ))}
         </div>

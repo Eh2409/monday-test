@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 export function TaskNameEditor({ name = '', onSave, placeholder }) {
 
@@ -10,6 +10,9 @@ export function TaskNameEditor({ name = '', onSave, placeholder }) {
         if (nameToEdit && nameToEdit !== name) {
             onSave(nameToEdit)
             if (placeholder) setNameToEdit('')
+        } else if (!nameToEdit) {
+            console.error(`Name can't be empty`)
+            setNameToEdit(name)
         }
     }
 
