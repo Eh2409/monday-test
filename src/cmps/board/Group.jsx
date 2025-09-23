@@ -1,15 +1,26 @@
+import { useEffect, useState } from "react"
 import { GroupTitleEditor } from "./group/GroupTitleEditor.jsx"
 import { TaskNameEditor } from "./group/TaskNameEditor.jsx"
 
-export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName }) {
+export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName, onRemoveTask }) {
 
-    const columns = group.items[0]?.columnValues.map(col => col.id) || []
+    const [columns, setColumns] = useState([])
+    useEffect(() => {
+        const columns = group.items[0]?.columnValues.map(col => col.id) || []
+        setColumns(columns)
+    }, [])
+
 
     return (
         <section className="group" style={{ '--before-columns': group.color }}>
 
             <div className="group-header">
                 <div className="group-title">
+
+                    <div className="remove-btn">
+                        <span>X</span>
+                    </div>
+
                     <GroupTitleEditor
                         title={group.title}
                         color={group.color}
@@ -34,7 +45,9 @@ export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName }) {
             <div className="group-table">
                 {group.items.map(item => (
                     <div key={item.id} className="table-row">
-
+                        <div className="remove-btn" onClick={() => onRemoveTask(group.id, item.id)}>
+                            <span>X</span>
+                        </div>
                         <div className="task-bar">
                             <div className="color-bar"></div>
                             <div className="cell name">
