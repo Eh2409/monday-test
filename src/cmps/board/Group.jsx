@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import { GroupTitleEditor } from "./group/GroupTitleEditor.jsx"
 import { TaskNameEditor } from "./group/TaskNameEditor.jsx"
 
-export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName, onRemoveTask }) {
+export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName,
+    onRemoveTask, onRemoveGroup, canRemoveGroup }) {
 
     const [columns, setColumns] = useState([])
     useEffect(() => {
@@ -10,16 +11,17 @@ export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName, onRe
         setColumns(columns)
     }, [])
 
-
     return (
         <section className="group" style={{ '--before-columns': group.color }}>
 
             <div className="group-header">
                 <div className="group-title">
 
-                    <div className="remove-btn">
+                    <button className="remove-btn"
+                        disabled={!canRemoveGroup}
+                        onClick={() => onRemoveGroup(group.id)}>
                         <span>X</span>
-                    </div>
+                    </button>
 
                     <GroupTitleEditor
                         title={group.title}

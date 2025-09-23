@@ -126,6 +126,14 @@ export function BoardDetails(props) {
         }))
     }
 
+    function onRemoveGroup(groupId) {
+        setPrevBoard(board)
+        setBoard(prev => ({
+            ...prev,
+            groups: prev.groups.filter(g => g.id !== groupId)
+        }))
+    }
+
 
     if (!board) return 'loading....'
     return (
@@ -143,6 +151,8 @@ export function BoardDetails(props) {
                     onAddTask={onAddTask}
                     onUpdateTaskName={onUpdateTaskName}
                     onRemoveTask={onRemoveTask}
+                    onRemoveGroup={onRemoveGroup}
+                    canRemoveGroup={board.groups?.length > 1}
                 />
             ))}
         </div>
