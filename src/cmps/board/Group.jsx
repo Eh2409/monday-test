@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react"
 import { GroupTitleEditor } from "./group/GroupTitleEditor.jsx"
 import { TaskNameEditor } from "./group/TaskNameEditor.jsx"
 
-export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName,
+export function Group({ group, columns, saveGroupTitle, onAddTask, onUpdateTaskName,
     onRemoveTask, onRemoveGroup, canRemoveGroup }) {
 
-    const [columns, setColumns] = useState([])
-    useEffect(() => {
-        const columns = group.items[0]?.columnValues.map(col => col.id) || []
-        setColumns(columns)
-    }, [])
+    var columnsTitles = columns.map(col => col.title) || []
 
     return (
         <section className="group" style={{ '--before-columns': group.color }}>
@@ -35,7 +30,7 @@ export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName,
                         <div className="color-bar"></div>
                         <div className="cell name">Task</div>
                     </div>
-                    {columns.map(colId => (
+                    {columnsTitles.map(colId => (
                         <div key={colId} className="cell">{colId}</div>
                     ))}
                     <div className="cell full"></div>
@@ -57,10 +52,10 @@ export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName,
                                     onSave={(taskName) => onUpdateTaskName(taskName, group.id, item.id)} />
                             </div>
                         </div>
-                        {item.columnValues.map(col => (
-                            <div key={col.id} className="cell">{col.value}</div>
-                        ))}
-                        <div className="cell full"></div>
+                        {columns.map(col => {
+                            return <div key={col.id} className="cell">{item[col.id] || ''}</div>
+                        })}
+                        < div className="cell full"></div>
                     </div>
                 ))}
 
@@ -74,6 +69,6 @@ export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName,
                     <div className="full-line"></div>
                 </div>
             </div>
-        </section>
+        </section >
     )
 }

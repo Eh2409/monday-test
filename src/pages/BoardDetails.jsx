@@ -62,24 +62,7 @@ export function BoardDetails(props) {
     }
 
     function onAddTask(taskName, groupId) {
-        const group = board.groups.find(g => g.id === groupId)
-        if (!group) return console.log(`group ${groupId} not found`)
-
-        var columnValues = []
-        if (group.items.length > 0 && group.items[0].columnValues.length) {
-            const itemColumnValues = structuredClone(group.items[0].columnValues)
-            columnValues = itemColumnValues.map(cv => {
-                if (cv.id === 'status') {
-                    cv.value = 'not started'
-                    cv.color = 'gray'
-                } else {
-                    cv.value = ''
-                }
-                return cv
-            })
-        }
-
-        const newTask = boardService.getEmptyTask(taskName, columnValues)
+        const newTask = boardService.getEmptyTask(taskName)
         setPrevBoard(board)
         setBoard(prev => ({
             ...prev,
@@ -147,6 +130,7 @@ export function BoardDetails(props) {
                 <Group
                     key={group.id}
                     group={group}
+                    columns={board.columns}
                     saveGroupTitle={saveGroupTitle}
                     onAddTask={onAddTask}
                     onUpdateTaskName={onUpdateTaskName}

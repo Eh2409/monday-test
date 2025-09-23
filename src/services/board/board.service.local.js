@@ -57,6 +57,11 @@ function _createBoard() {
         name: makeLorem(1),
         createdAt: Date.now(),
         state: '',
+        columns: [
+            { id: 'owner', title: 'owner', type: 'owner' },
+            { id: 'status', title: 'status', type: 'status' },
+            { id: 'date', title: 'date', title: 'due date' }
+        ],
         groups: [
             {
                 id: makeId(),
@@ -66,48 +71,19 @@ function _createBoard() {
                     {
                         id: makeId(),
                         name: makeLorem(3),
-                        columnValues: [
-                            { id: 'owner', value: 'Eliad', },
-                            { id: 'status', value: 'Working on it', color: '' },
-                            { id: 'date', value: '2025-09-22' }
-                        ]
+                        status: 'Working on it',
+                        owner: 'eliad',
+                        date: '2025-09-22'
                     },
                     {
                         id: makeId(),
                         name: makeLorem(3),
-                        columnValues: [
-                            { id: 'owner', value: 'Eliad', },
-                            { id: 'status', value: 'Working on it', color: '' },
-                            { id: 'due date', value: '2025-09-22' }
-                        ]
+                        status: 'Working on it',
+                        owner: 'eliad',
+                        date: '2025-09-22'
                     }
                 ]
             },
-            {
-                id: makeId(),
-                title: makeLorem(3),
-                color: '#000000',
-                items: [
-                    {
-                        id: makeId(),
-                        name: makeLorem(3),
-                        columnValues: [
-                            { id: 'owner', value: 'Eliad', },
-                            { id: 'status', value: 'Working on it', color: '' },
-                            { id: 'due date', value: '2025-09-22' }
-                        ]
-                    },
-                    {
-                        id: makeId(),
-                        name: makeLorem(3),
-                        columnValues: [
-                            { id: 'owner', value: 'Eliad', },
-                            { id: 'status', value: 'Working on it', color: '' },
-                            { id: 'due date', value: '2025-09-22' }
-                        ]
-                    }
-                ]
-            }
         ]
     }
 }
