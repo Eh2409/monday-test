@@ -1,5 +1,16 @@
 .board-details {
+    position: relative;
+    // width: 90vw;
+    // height: 90vh;
+    // overflow: auto;
+
     .board-header {
+        // position: sticky;
+        // top: 0;
+        // left: 0;
         margin-block-end: 1em;
+        background-color: rgb(255, 255, 255);
+        z-index: 200;
+        height: 40px;
     }
 }

@@ -9,36 +9,54 @@ export function Group({ group, saveGroupTitle, onAddTask, onUpdateTaskName }) {
         <section className="group" style={{ '--before-columns': group.color }}>
 
             <div className="group-header">
-                <GroupTitleEditor
-                    title={group.title}
-                    color={group.color}
-                    onSave={((dataToSave) => saveGroupTitle(dataToSave, group.id))}
-                />
-            </div>
-            <div className="group-table">
+                <div className="group-title">
+                    <GroupTitleEditor
+                        title={group.title}
+                        color={group.color}
+                        onSave={((dataToSave) => saveGroupTitle(dataToSave, group.id))}
+                    />
+                </div>
+
                 <div className="table-row table-header">
-                    <div className="cell name">Task</div>
+                    <div className="task-bar">
+                        <div className="color-bar"></div>
+                        <div className="cell name">Task</div>
+                    </div>
                     {columns.map(colId => (
                         <div key={colId} className="cell">{colId}</div>
                     ))}
+                    <div className="cell full"></div>
                 </div>
 
+            </div>
+
+
+            <div className="group-table">
                 {group.items.map(item => (
                     <div key={item.id} className="table-row">
-                        <div className="cell">
-                            <TaskNameEditor name={item.name}
-                                onSave={(taskName) => onUpdateTaskName(taskName, group.id, item.id)} />
+
+                        <div className="task-bar">
+                            <div className="color-bar"></div>
+                            <div className="cell name">
+                                <TaskNameEditor name={item.name}
+                                    onSave={(taskName) => onUpdateTaskName(taskName, group.id, item.id)} />
+                            </div>
                         </div>
                         {item.columnValues.map(col => (
                             <div key={col.id} className="cell">{col.value}</div>
                         ))}
+                        <div className="cell full"></div>
                     </div>
                 ))}
 
                 <div className="table-row">
-                    <div className="cell add-task">
-                        <TaskNameEditor placeholder={"+ Add task"} onSave={(taskName) => onAddTask(taskName, group.id)} />
+                    <div className="task-bar">
+                        <div className="color-bar"></div>
+                        <div className="cell add-task full">
+                            <TaskNameEditor placeholder={"+ Add task"} onSave={(taskName) => onAddTask(taskName, group.id)} />
+                        </div>
                     </div>
+                    <div className="full-line"></div>
                 </div>
             </div>
         </section>

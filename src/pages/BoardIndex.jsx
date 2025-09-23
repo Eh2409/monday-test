@@ -27,6 +27,7 @@ export function BoardIndex() {
         <section>
             <header className="flex justify-between align-center">
             </header>
+
             {boards?.length > 0
                 ? <BoardList boards={boards} />
                 : <div>No board found</div>
