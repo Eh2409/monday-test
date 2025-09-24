@@ -45,7 +45,6 @@ export function BoardEdit(props) {
 
     return (
         <section className="board-edit">
-            <h2>Create board</h2>
             <form onSubmit={onSave}>
 
                 <label htmlFor="name">Board name</label>
@@ -94,7 +93,7 @@ export function BoardEdit(props) {
                         </li>
                     })}
                     <li key="custom" className="flex align-center">
-                        <label htmlFor="custom">
+                        <label htmlFor="custom" className="flex">
                             <input
                                 type="radio"
                                 id="custom"
@@ -118,7 +117,7 @@ export function BoardEdit(props) {
 
                 <div className="actions">
                     <button type="button">Cancel</button>
-                    <button type="submit">Create Board</button>
+                    <button type="submit" className="create-baord-btn">Create Board</button>
                 </div>
             </form>
         </section>

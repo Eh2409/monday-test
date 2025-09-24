@@ -10,6 +10,7 @@ button {
         background-color: color-mix(in srgb, white 80%, black 20%);
     }
 
+    &.create-baord-btn,
     &.add-task {
         background-color: #2373e7;
         color: white;
