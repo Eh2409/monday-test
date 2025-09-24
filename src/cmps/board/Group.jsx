@@ -104,7 +104,7 @@ export function Group({
                             <TaskNameEditor placeholder={"+ Add task"} onSave={(taskName) => onAddTask(taskName, group.id)} />
                         </div>
                     </div>
-                    <div className="full-line"></div>
+                    <div className="cell full-line"></div>
                 </div>
             </div>
         </section >
