@@ -99,7 +99,7 @@ async function removeGroup(groupId, boardId) {
 
 // task
 
-async function addTask(taskName, boardId, groupId) {
+async function addTask(taskName, boardId, groupId, method) {
     try {
         var board = await getById(boardId)
         if (!board) throw new Error(`borad ${boardId} not found`)
@@ -109,15 +109,15 @@ async function addTask(taskName, boardId, groupId) {
             name: taskName,
         }
 
-        board = {
-            ...board,
-            groups: board.groups.map(g => {
-                if (g.id === groupId) {
-                    return { ...g, items: [...g.items, taskToSave] }
-                }
-                return g
-            })
+        const groupIdx = board.groups.findIndex(g => g.id === groupId)
+        if (groupIdx === -1) throw new Error(`group ${groupId} not found`)
+
+        if (method === 'unshift') {
+            board.groups[groupIdx].items.unshift(taskToSave)
+        } else {
+            board.groups[groupIdx].items.push(taskToSave)
         }
+
 
         return await save(board)
     } catch (err) {

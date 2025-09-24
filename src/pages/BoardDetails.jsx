@@ -84,10 +84,10 @@ export function BoardDetails(props) {
 
     // task
 
-    async function onAddTask(taskName, groupId) {
+    async function onAddTask(taskName, groupId, method) {
         setPrevBoard(board)
         try {
-            const savedBord = await boardService.addTask(taskName, board._id, groupId)
+            const savedBord = await boardService.addTask(taskName, board._id, groupId, method)
             setBoard(savedBord)
         } catch (err) {
             console.log('err:', err)
@@ -124,7 +124,13 @@ export function BoardDetails(props) {
 
             <header className='board-header'>
                 <h2>{board.name}</h2>
+                <button
+                    className='add-task'
+                    onClick={() => onAddTask('New Item', board?.groups[0]?.id, 'unshift')}>
+                    New Item
+                </button>
             </header>
+
 
             {board.groups.map(group => (
                 <Group

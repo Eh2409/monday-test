@@ -1,0 +1,24 @@
+button {
+    cursor: pointer;
+    border: none;
+    padding: 0.5em;
+    outline: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+
+    &:hover {
+        background-color: color-mix(in srgb, white 80%, black 20%);
+    }
+
+    &.add-task {
+        background-color: #2373e7;
+        color: white;
+
+        &:hover {
+            background-color: color-mix(in srgb, #2373e7 80%, black 20%)
+        }
+    }
+
+
+
+}
