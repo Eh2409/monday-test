@@ -42,8 +42,8 @@ async function save(board) {
     if (board?._id) {
         return await storageService.put(BOARD_KEY, board)
     } else {
-        board.createdAt = Date.now()
-        return await storageService.post(BOARD_KEY, board)
+        const boardToSave = _getDefaultBoard(board)
+        return await storageService.post(BOARD_KEY, boardToSave)
     }
 }
 
@@ -199,6 +199,9 @@ function _createBoard() {
         _id: makeId(),
         name: makeLorem(1),
         createdAt: Date.now(),
+        privacy: 'main',
+        managingType: 'items',
+        state: '',
         labels: [
             {
                 id: 'l101',
@@ -216,7 +219,6 @@ function _createBoard() {
                 color: '#f03e16',
             },
         ],
-        state: '',
         columns: [
             { id: 'owner', title: 'owner', type: 'owner' },
             { id: 'status', title: 'status', type: 'status' },
@@ -276,5 +278,96 @@ function _getEmptyGroup() {
         title: 'New Group',
         color: getRandomColor(),
         items: []
+    }
+}
+
+
+function _getDefaultBoard({ name = 'New Board', privacy = 'main', managingType = 'items' }) {
+    const labels = [
+        { id: 'l101', title: 'Done', color: '#23cf51' },
+        { id: 'l102', title: 'Working on it', color: '#f0c816' },
+        { id: 'l103', title: 'Stuck', color: '#f03e16' },
+    ]
+
+    return {
+        _id: makeId(),
+        name,
+        createdAt: Date.now(),
+        privacy,
+        managingType,
+        state: '',
+        labels: [
+            {
+                id: 'l101',
+                title: 'Done',
+                color: '#23cf51',
+            },
+            {
+                id: 'l102',
+                title: 'Working on it',
+                color: '#f0c816',
+            },
+            {
+                id: 'l103',
+                title: 'Stuck',
+                color: '#f03e16',
+            },
+        ],
+        columns: [
+            { id: 'owner', title: 'owner', type: 'owner' },
+            { id: 'status', title: 'status', type: 'status' },
+            { id: 'date', title: 'date', title: 'due date' }
+        ],
+        groups: [
+            {
+                id: makeId(),
+                title: 'New Group',
+                color: getRandomColor(),
+                items: [
+                    {
+                        id: makeId(),
+                        name: 'Item 1',
+                        status: labels[getRandomIntInclusive(0, labels.length - 1)].title,
+                        owner: '',
+                        date: Date.now()
+                    },
+                    {
+                        id: makeId(),
+                        name: 'Item 2',
+                        status: labels[getRandomIntInclusive(0, labels.length - 1)].title,
+                        owner: '',
+                        date: Date.now()
+                    },
+                    {
+                        id: makeId(),
+                        name: 'Item 3',
+                        status: labels[getRandomIntInclusive(0, labels.length - 1)].title,
+                        owner: '',
+                        date: Date.now()
+                    }
+                ]
+            },
+            {
+                id: makeId(),
+                title: 'New Group',
+                color: getRandomColor(),
+                items: [
+                    {
+                        id: makeId(),
+                        name: 'Item 4',
+                        status: '',
+                        owner: '',
+                        date: Date.now()
+                    },
+                    {
+                        id: makeId(),
+                        name: 'Item 5',
+                        status: '',
+                        owner: '',
+                        date: Date.now()
+                    }
+                ]
+            }
+        ]
     }
 }

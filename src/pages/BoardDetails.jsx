@@ -14,6 +14,8 @@ export function BoardDetails(props) {
     const [board, setBoard] = useState(null)
     const [prevBoard, setPrevBoard] = useState(null)
 
+    console.log('board:', board)
+
     useEffect(() => {
         if (boardId) {
             getBoard(boardId)

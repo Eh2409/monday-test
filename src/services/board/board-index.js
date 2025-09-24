@@ -1,6 +1,3 @@
-
-import { makeId } from "../util.service.js"
-
 const { DEV, VITE_LOCAL } = import.meta.env
 
 import { boardService as local } from "./board.service.local.js"
@@ -15,6 +12,32 @@ import { boardService as local } from "./board.service.local.js"
 
 // }
 
+function getEmptyBoard() {
+    return {
+        name: 'New Board',
+        privacy: 'main',
+        managingType: 'items',
+    }
+}
+
+function getPrivacyValues() {
+    return ['main', 'private', 'shareable',]
+}
+
+function getBoardManagingTypes() {
+    return [
+        "items",
+        'budgets',
+        'employees',
+        "campaigns",
+        "leads",
+        "projects",
+        "creatives",
+        "clients",
+        "tasks",
+    ]
+}
+
 
 const service = local
-export const boardService = { ...service }
+export const boardService = { ...service, getEmptyBoard, getPrivacyValues, getBoardManagingTypes }
