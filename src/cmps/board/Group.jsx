@@ -68,9 +68,9 @@ export function Group({
                 {group.items.map(item => (
                     <div key={item.id} className="table-row">
                         <div className="remove-btn-wrapper">
-                            <div className="remove-btn" onClick={() => onRemoveTask(group.id, item.id)}>
+                            <button className="remove-btn" onClick={() => onRemoveTask(group.id, item.id)}>
                                 <span>X</span>
-                            </div>
+                            </button>
                         </div>
                         <div className="task-bar">
                             <div className="color-bar"></div>
