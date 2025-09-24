@@ -2,24 +2,41 @@
     position: relative;
     margin-block-end: 1em;
 
-    .remove-btn {
+    .remove-btn-wrapper {
         position: absolute;
-        justify-content: center;
-        align-items: center;
+        display: block;
+
+        top: 0;
+        left: -40px;
 
         width: 40px;
         height: 100%;
-        left: 0;
         z-index: 10;
-        display: none;
-        cursor: pointer;
-        background-color: white;
 
         &:hover {
-            background-color: rgb(219, 219, 219);
-            display: flex;
+            .remove-btn {
+                display: flex;
+            }
+        }
+
+        .remove-btn {
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            height: 100%;
+
+            display: none;
+            cursor: pointer;
+            background-color: white;
+
+            &:hover {
+                background-color: rgb(219, 219, 219);
+                display: flex;
+            }
         }
     }
+
 
     .group-header {
         // position: sticky;
@@ -34,13 +51,18 @@
 
             min-height: 40px;
             align-content: center;
-            padding-inline-start: 40px;
+            // padding-inline-start: 40px;
 
             &:hover {
-                .remove-btn {
-                    display: flex;
+                .remove-btn-wrapper {
                     top: 0;
+                    left: -40px;
+
+                    .remove-btn {
+                        display: flex;
+                    }
                 }
+
             }
         }
     }
@@ -51,12 +73,13 @@
         grid-template-columns: 300px 100px 200px 150px 70vw;
         align-items: center;
         background-color: white;
-        padding-inline-start: 40px;
+
 
         &:hover {
             .remove-btn {
                 display: flex;
                 top: 0;
+                left: -40px;
             }
         }
 

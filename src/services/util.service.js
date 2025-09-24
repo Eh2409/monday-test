@@ -22,7 +22,7 @@ export function makeLorem(size = 100) {
 export function getRandomIntInclusive(min, max) {
     min = Math.ceil(min)
     max = Math.floor(max)
-    return Math.floor(Math.random() * (max - min + 1)) + min 
+    return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 
@@ -52,4 +52,11 @@ export function saveToStorage(key, value) {
 export function loadFromStorage(key) {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
+}
+
+export function getRandomColor() {
+    const colors = ["#FF5733", "#33FF57", "#3357FF", "#FF33A8", "#FFD133", "#33FFF6",
+        "#9D33FF", "#FF8C33", "#2ECC71", "#E74C3C", "#1ABC9C", "#3498DB", "#F1C40F", "#E67E22", "#2C3E50"]
+    const idx = getRandomIntInclusive(0, colors.length - 1)
+    return colors[idx]
 }

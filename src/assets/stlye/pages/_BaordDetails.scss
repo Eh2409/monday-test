@@ -3,6 +3,7 @@
     width: 90vw;
     height: 90vh;
     overflow: auto;
+    padding-inline-start: 40px;
 
     .board-header {
         // position: sticky;
@@ -12,6 +13,6 @@
         background-color: rgb(255, 255, 255);
         z-index: 200;
         height: 40px;
-        padding-inline-start: 40px;
+        // padding-inline-start: 40px;
     }
 }

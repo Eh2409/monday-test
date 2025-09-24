@@ -45,97 +45,82 @@ export function BoardDetails(props) {
         }
     }
 
+    // group
 
-    function saveGroupTitle(dataToSave, groupId) {
-        const { title, color } = dataToSave
-
+    async function onAddGroup() {
         setPrevBoard(board)
-        setBoard(prev => ({
-            ...prev,
-            groups: prev.groups.map(g => {
-                if (g.id === groupId) {
-                    return { ...g, title: title, color: color }
-                }
-                return g
-            })
-        }))
-    }
-
-    function onAddTask(taskName, groupId) {
-        const newTask = boardService.getEmptyTask(taskName)
-        setPrevBoard(board)
-        setBoard(prev => ({
-            ...prev,
-            groups: prev.groups.map(g => {
-                if (g.id === groupId) {
-                    return { ...g, items: [...g.items, newTask] }
-                }
-                return g
-            })
-        }))
-    }
-
-    function onUpdateTaskName(taskName, groupId, itemId) {
-        setPrevBoard(board)
-        setBoard(prev => ({
-            ...prev,
-            groups: prev.groups.map(g => {
-                if (g.id === groupId) {
-                    return {
-                        ...g, items: g.items.map(item => {
-                            if (item.id === itemId) {
-                                return { ...item, name: taskName }
-                            }
-                            return item
-                        })
-                    }
-                }
-                return g
-            })
-        }))
+        try {
+            const savedBord = await boardService.addGroup(board._id)
+            setBoard(savedBord)
+        } catch (err) {
+            console.log('err:', err)
+            setBoard(prevBoard)
+        }
     }
 
 
-    function onRemoveTask(groupId, itemId) {
+    async function onUpdateGroup(groupToUpdate) {
         setPrevBoard(board)
-        setBoard(prev => ({
-            ...prev,
-            groups: prev.groups.map(g => {
-                if (g.id === groupId) {
-                    return { ...g, items: g.items.filter(i => i.id !== itemId) }
-                }
-                return g
-            })
-        }))
+        try {
+            const savedBord = await boardService.updateGroup(groupToUpdate, board._id)
+            setBoard(savedBord)
+        } catch (err) {
+            console.log('err:', err)
+            setBoard(prevBoard)
+        }
     }
 
-    function onRemoveGroup(groupId) {
+    async function onRemoveGroup(groupId) {
         setPrevBoard(board)
-        setBoard(prev => ({
-            ...prev,
-            groups: prev.groups.filter(g => g.id !== groupId)
-        }))
+        try {
+            const savedBord = await boardService.removeGroup(groupId, board._id)
+            setBoard(savedBord)
+        } catch (err) {
+            console.log('err:', err)
+            setBoard(prevBoard)
+        }
     }
 
-    function onUpdateTask(taskToSave, groupId) {
+
+    // task
+
+    async function onAddTask(taskName, groupId) {
         setPrevBoard(board)
-        setBoard(prev => ({
-            ...prev,
-            groups: prev.groups.map(g => {
-                if (g.id === groupId) {
-                    return {
-                        ...g, items: g.items.map(item => item.id === taskToSave.id ? taskToSave : item)
-                    }
-                }
-                return g
-            })
-        }))
+        try {
+            const savedBord = await boardService.addTask(taskName, board._id, groupId)
+            setBoard(savedBord)
+        } catch (err) {
+            console.log('err:', err)
+            setBoard(prevBoard)
+        }
+    }
+
+    async function onUpdateTask(taskToSave, groupId) {
+        setPrevBoard(board)
+        try {
+            const savedBord = await boardService.updateTask(taskToSave, board._id, groupId)
+            setBoard(savedBord)
+        } catch (err) {
+            console.log('err:', err)
+            setBoard(prevBoard)
+        }
+    }
+
+    async function onRemoveTask(groupId, itemId) {
+        setPrevBoard(board)
+        try {
+            const savedBord = await boardService.removeTask(itemId, board._id, groupId)
+            setBoard(savedBord)
+        } catch (err) {
+            console.log('err:', err)
+            setBoard(prevBoard)
+        }
     }
 
 
     if (!board) return 'loading....'
     return (
-        <div className="board-details">
+        <section className="board-details">
 
             <header className='board-header'>
                 <h2>{board.name}</h2>
@@ -146,18 +131,20 @@ export function BoardDetails(props) {
                     key={group.id}
                     group={group}
                     columns={board.columns}
-                    saveGroupTitle={saveGroupTitle}
-                    onAddTask={onAddTask}
-                    onUpdateTaskName={onUpdateTaskName}
-                    onRemoveTask={onRemoveTask}
-                    onRemoveGroup={onRemoveGroup}
-                    canRemoveGroup={board.groups?.length > 1}
                     labels={board.labels}
+                    canRemoveGroup={board.groups?.length > 1}
+                    // group funcs
+                    onUpdateGroup={onUpdateGroup}
+                    onRemoveGroup={onRemoveGroup}
+                    // task funcs
+                    onAddTask={onAddTask}
+                    onRemoveTask={onRemoveTask}
                     onUpdateTask={onUpdateTask}
                 />
             ))}
-        </div>
+
+            <button onClick={onAddGroup}>+ Add New Group</button>
+        </section>
     )
 
 }
-
