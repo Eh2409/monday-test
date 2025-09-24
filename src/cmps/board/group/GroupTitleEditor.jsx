@@ -37,8 +37,16 @@ export function GroupTitleEditor({ title, color, onSave }) {
 
     function saveChanges() {
         setIsEditing(false)
-        if (titleToEdit !== title || colorToEdit !== color) {
-            onSave({ title: titleToEdit, color: colorToEdit })
+
+        const valueToSave = {}
+
+        if (titleToEdit && titleToEdit !== title) valueToSave.title = titleToEdit
+        else if (!titleToEdit) setTitleToEdit(title)
+
+        if (colorToEdit !== color) valueToSave.color = colorToEdit
+
+        if (valueToSave?.title || valueToSave?.color) {
+            onSave(valueToSave)
         }
     }
 
