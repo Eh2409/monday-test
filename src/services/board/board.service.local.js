@@ -56,6 +56,23 @@ function _createBoard() {
         _id: makeId(),
         name: makeLorem(1),
         createdAt: Date.now(),
+        labels: [
+            {
+                id: 'l101',
+                title: 'Done',
+                color: '#23cf51',
+            },
+            {
+                id: 'l102',
+                title: 'Working on it',
+                color: '#f0c816',
+            },
+            {
+                id: 'l103',
+                title: 'Stuck',
+                color: '#f03e16',
+            },
+        ],
         state: '',
         columns: [
             { id: 'owner', title: 'owner', type: 'owner' },

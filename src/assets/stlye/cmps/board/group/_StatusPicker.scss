@@ -1,0 +1,19 @@
+.status-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+    cursor: pointer;
+
+    select {
+        border: none;
+        outline: none;
+        padding: 0;
+        margin: 0;
+        background-color: inherit;
+        flex-grow: 1;
+        text-align: center;
+        color: inherit
+    }
+}

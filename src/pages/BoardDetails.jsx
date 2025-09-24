@@ -117,6 +117,21 @@ export function BoardDetails(props) {
         }))
     }
 
+    function onUpdateTask(taskToSave, groupId) {
+        setPrevBoard(board)
+        setBoard(prev => ({
+            ...prev,
+            groups: prev.groups.map(g => {
+                if (g.id === groupId) {
+                    return {
+                        ...g, items: g.items.map(item => item.id === taskToSave.id ? taskToSave : item)
+                    }
+                }
+                return g
+            })
+        }))
+    }
+
 
     if (!board) return 'loading....'
     return (
@@ -137,6 +152,8 @@ export function BoardDetails(props) {
                     onRemoveTask={onRemoveTask}
                     onRemoveGroup={onRemoveGroup}
                     canRemoveGroup={board.groups?.length > 1}
+                    labels={board.labels}
+                    onUpdateTask={onUpdateTask}
                 />
             ))}
         </div>

@@ -130,6 +130,10 @@
             height: 100%;
             border-block: 1px solid #d0d4e4;
 
+            &:has(.status-picker) {
+                padding: 0;
+            }
+
             &.add-task {
                 border-inline-end: 0;
             }
