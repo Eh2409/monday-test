@@ -12,6 +12,7 @@ import { BoardDetails } from "./pages/BoardDetails.jsx";
 
 //cmps
 import { AppHeader } from "./cmps/AppHeader";
+import { AsideMenu } from "./cmps/AsideMenu.jsx";
 
 export function RootCmp(props) {
     return (
@@ -19,7 +20,10 @@ export function RootCmp(props) {
             <Router>
                 <section className="main-container">
                     <AppHeader />
-                    <main >
+                    <aside className="site-aside">
+                        <AsideMenu />
+                    </aside>
+                    <main className="site-main-content">
                         <Routes>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/board" element={<BoardIndex />} />

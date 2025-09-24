@@ -1,3 +1,4 @@
+.btn,
 button {
     cursor: pointer;
     border: none;
@@ -10,6 +11,7 @@ button {
         background-color: color-mix(in srgb, white 80%, black 20%);
     }
 
+    &.start-btn,
     &.create-baord-btn,
     &.add-task {
         background-color: #2373e7;
@@ -18,6 +20,14 @@ button {
         &:hover {
             background-color: color-mix(in srgb, #2373e7 80%, black 20%)
         }
+    }
+
+    &.start-btn {
+        text-decoration: none;
+        text-align: center;
+        justify-self: center;
+        border-radius: 100vh;
+        font-size: 1.5em;
     }
 
     &.remove-btn {

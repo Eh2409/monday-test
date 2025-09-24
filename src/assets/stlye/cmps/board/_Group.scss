@@ -1,13 +1,17 @@
 .group {
     position: relative;
     margin-block-end: 1em;
+    width: 100%;
+
 
     .remove-btn-wrapper {
         position: absolute;
-        display: block;
+        display: inline-block;
+        background-color: white;
+        z-index: 10;
 
         top: 0;
-        left: -30px;
+        left: 0;
 
         width: 30px;
         height: 30px;
@@ -39,18 +43,35 @@
 
 
     .group-header {
+
+        position: sticky;
+        top: 140px;
+        background-color: white;
+        z-index: 30;
+
         .cell {
             border-block: 1px solid #d0d4e4;
         }
 
-        .group-title {
-            position: relative;
+        .group-title-wrapper {
+
             margin-block-end: 0.5em;
             width: 70vw;
 
             min-height: 30px;
             align-content: center;
+
+            .group-title {
+                display: inline-block;
+                position: sticky;
+                left: 30px;
+            }
+
             // padding-inline-start: 40px;
+            .remove-btn-wrapper {
+                top: 0;
+                left: -30px;
+            }
 
             &:hover {
                 .remove-btn-wrapper {
@@ -64,15 +85,16 @@
 
             }
         }
+
     }
+
 
     .table-row {
         position: relative;
         display: grid;
-        grid-template-columns: 300px 100px 200px 150px 1fr;
+        grid-auto-flow: column;
         align-items: center;
         background-color: white;
-
 
         &:hover {
             .remove-btn {
@@ -86,6 +108,11 @@
         &:hover:not(.table-header) {
 
             background-color: rgb(246, 246, 246);
+
+            .add-task,
+            .name {
+                background-color: rgb(246, 246, 246);
+            }
 
             &:not(:last-child) {
                 box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -108,10 +135,11 @@
         }
 
         .task-bar {
-            // position: sticky;
-            // left: 0;
+            position: sticky;
+            left: 0px;
+            background-color: white;
             display: grid;
-            grid-template-columns: 6px 1fr;
+            grid-template-columns: 30px 6px 1fr;
             z-index: 4;
 
             &:has(.add-task) {
@@ -131,7 +159,6 @@
         .full-line {
             height: 100%;
             width: 100%;
-            grid-column: 2/-1;
         }
 
         &:last-of-type {
@@ -157,7 +184,7 @@
             white-space: nowrap;
             height: 100%;
             border-block-end: 1px solid #d0d4e4;
-
+            min-width: 200px;
 
             &:has(.status-picker) {
                 padding: 0;

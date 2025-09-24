@@ -33,25 +33,28 @@ export function Group({
         <section className="group" style={{ '--before-columns': group.color }}>
 
             <div className="group-header">
-                <div className="group-title">
 
-                    <div className="remove-btn-wrapper">
-                        <button className="remove-btn"
-                            disabled={!canRemoveGroup}
-                            onClick={() => onRemoveGroup(group.id)}>
-                            <span>X</span>
-                        </button>
+                <div className="group-title-wrapper">
+                    <div className="group-title">
+                        <div className="remove-btn-wrapper">
+                            <button className="remove-btn"
+                                disabled={!canRemoveGroup}
+                                onClick={() => onRemoveGroup(group.id)}>
+                                <span>X</span>
+                            </button>
+                        </div>
+
+                        <GroupTitleEditor
+                            title={group.title}
+                            color={group.color}
+                            onSave={((newVals) => setGroupToUpdate(newVals, group))}
+                        />
                     </div>
-
-                    <GroupTitleEditor
-                        title={group.title}
-                        color={group.color}
-                        onSave={((newVals) => setGroupToUpdate(newVals, group))}
-                    />
                 </div>
 
                 <div className="table-row table-header">
                     <div className="task-bar">
+                        <div className="white-block"></div>
                         <div className="color-bar"></div>
                         <div className="cell name">Task</div>
                     </div>
@@ -67,12 +70,13 @@ export function Group({
             <div className="group-table">
                 {group.items.map(item => (
                     <div key={item.id} className="table-row">
-                        <div className="remove-btn-wrapper">
-                            <button className="remove-btn" onClick={() => onRemoveTask(group.id, item.id)}>
-                                <span>X</span>
-                            </button>
-                        </div>
                         <div className="task-bar">
+                            <div className="remove-btn-wrapper">
+                                <button className="remove-btn" onClick={() => onRemoveTask(group.id, item.id)}>
+                                    <span>X</span>
+                                </button>
+                            </div>
+                            <div className="white-block"></div>
                             <div className="color-bar"></div>
                             <div className="cell name">
                                 <TaskNameEditor name={item.name}
@@ -99,6 +103,7 @@ export function Group({
 
                 <div className="table-row">
                     <div className="task-bar">
+                        <div className="white-block"></div>
                         <div className="color-bar"></div>
                         <div className="cell add-task full">
                             <TaskNameEditor placeholder={"+ Add task"} onSave={(taskName) => onAddTask(taskName, group.id)} />

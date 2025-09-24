@@ -124,14 +124,20 @@ export function BoardDetails(props) {
     return (
         <section className="board-details">
 
-            <header className='board-header'>
+
+            <div className='board-header'>
                 <h2>{board.name}</h2>
-                <button
-                    className='add-task'
-                    onClick={() => onAddTask('New Item', board?.groups[0]?.id, 'unshift')}>
-                    New Item
-                </button>
-            </header>
+
+                <hr />
+
+                <div className='board-details-actions'>
+                    <button
+                        className='add-task'
+                        onClick={() => onAddTask('New Item', board?.groups[0]?.id, 'unshift')}>
+                        New Item
+                    </button>
+                </div>
+            </div>
 
 
             {board.groups.map(group => (
@@ -151,7 +157,7 @@ export function BoardDetails(props) {
                 />
             ))}
 
-            <button onClick={onAddGroup}>+ Add New Group</button>
+            <button onClick={onAddGroup} className='add-goupe-btn'>+ Add New Group</button>
         </section>
     )
 

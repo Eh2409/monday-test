@@ -1,19 +1,27 @@
 .board-details {
     position: relative;
-    // width: 90vw;
-    // height: 90vh;
-    // overflow: auto;
-    padding-inline-start: 30px;
-    margin-block-end: 2em;
+    padding-block-end: 2em;
+    background-color: white;
+
+    height: 100%;
+    overflow: auto;
+
 
     .board-header {
-        // position: sticky;
-        // top: 0;
-        // left: 0;
-        margin-block-end: 2em;
+        position: sticky;
+        top: 0;
+        left: 0;
         background-color: rgb(255, 255, 255);
         z-index: 200;
-        height: 40px;
-        // padding-inline-start: 40px;
+        height: 140px;
+        padding-inline: 30px;
+        padding-block-start: 30px;
     }
+
+    .add-goupe-btn {
+        position: sticky;
+        left: 30px;
+        margin-inline-start: 30px;
+    }
+
 }

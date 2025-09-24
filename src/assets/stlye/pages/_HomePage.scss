@@ -1,0 +1,37 @@
+.home-page {
+    height: 100%;
+    padding-block-end: 1em;
+
+    .welcome-board {
+        display: grid;
+        place-content: center;
+
+        border-radius: 30px;
+        background-color: #f0f3ff;
+        width: 100%;
+        height: 100%;
+
+        .wlcome-msg {
+            font-weight: 200;
+            line-height: 110%;
+            font-size: 2em;
+            text-wrap-style: balance;
+            text-align: center;
+            margin-block-end: 0.5em;
+        }
+    }
+}
+
+
+
+@media (min-width: 750px) {
+    .home-page {
+        .welcome-board {
+            .wlcome-msg {
+                font-weight: 200;
+                line-height: 110%;
+                font-size: 72px;
+            }
+        }
+    }
+}

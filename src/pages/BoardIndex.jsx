@@ -34,8 +34,9 @@ export function BoardIndex() {
     }
 
     return (
-        <section>
-            <header className="flex justify-between align-center">
+        <section className="board-index">
+
+            <header className="board-index-header flex justify-between align-center">
                 <button onClick={toggleIsPopupOpen}>Add Board</button>
             </header>
 
