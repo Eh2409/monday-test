@@ -30,9 +30,10 @@
 
         .site-aside {
             grid-area: site-aside;
-            min-height: calc(100vh - 50px);
+            height: calc(100vh - 50px);
             background-color: #f8f9fe;
             border-radius: 20px 0 0 0;
+            overflow: hidden;
         }
 
         .site-main-content {

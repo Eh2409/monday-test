@@ -20,7 +20,7 @@ export function BoardDetails(props) {
         if (boardId) {
             getBoard(boardId)
         }
-    }, [])
+    }, [boardId])
 
     useEffect(() => {
         if (prevBoard) {

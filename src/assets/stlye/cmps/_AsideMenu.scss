@@ -1,4 +1,35 @@
 .aside-menu {
     padding: 1em;
     height: 100%;
+
+    a {
+        display: block;
+        border: 0;
+        align-self: center;
+        text-decoration: none;
+        color: inherit;
+        width: 92%;
+        padding: 8px;
+        font-weight: 700;
+        border-radius: 4px;
+        margin-block-end: 1em;
+
+        &.active {
+            background-color: rgba(47, 57, 150, 0.152);
+        }
+
+        &:hover {
+            box-shadow: none;
+            background-color: rgba(128, 128, 128, 0.348);
+
+            &.active {
+                background-color: rgba(47, 57, 150, 0.152);
+            }
+        }
+    }
+
+    .board-list {
+        overflow: auto;
+        height: 100%;
+    }
 }
