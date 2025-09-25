@@ -3,6 +3,28 @@
     margin-block-end: 1em;
     width: 100%;
 
+    &.dragging {
+        z-index: 1000;
+
+        &>*:not(.group-header) {
+            display: none;
+        }
+
+        .group-header {
+            opacity: 0.5;
+
+            .table-header {
+                display: none;
+            }
+
+            .remove-btn-wrapper {
+                display: none;
+            }
+
+        }
+
+    }
+
 
     .remove-btn-wrapper {
         position: absolute;
@@ -53,17 +75,21 @@
         }
 
         .group-title-wrapper {
-
             margin-block-end: 0.5em;
-            width: 70vw;
-
-            min-height: 30px;
-            align-content: center;
 
             .group-title {
-                display: inline-block;
+                display: flex;
+                gap: 0.5em;
+
+                min-height: 30px;
+                align-items: center;
+
                 position: sticky;
                 left: 30px;
+            }
+
+            .group-grab {
+                cursor: grab;
             }
 
             .remove-btn-wrapper {

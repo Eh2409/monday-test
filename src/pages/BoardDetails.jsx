@@ -4,8 +4,13 @@ import { useParams } from "react-router-dom"
 // services
 import { boardService } from '../services/board/board-index.js'
 
+// dnd
+import { closestCorners, DndContext } from "@dnd-kit/core"
+import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
+
 // cmps
 import { Group } from '../cmps/board/Group.jsx'
+import { GroupList } from '../cmps/board/GroupList.jsx'
 
 export function BoardDetails(props) {
     const params = useParams()
@@ -119,6 +124,29 @@ export function BoardDetails(props) {
         }
     }
 
+    function getGroupIdx(groupId) {
+        const group = board.groups.findIndex(g => g.id === groupId)
+        return group
+    }
+
+    function handleDragEnd(ev) {
+        const { active, over } = ev
+        if (!over) return
+        if (active.id === over.id) return
+
+        setPrevBoard(board)
+        setBoard(prev => {
+            const originalPos = getGroupIdx(active.id)
+            const newPos = getGroupIdx(over.id)
+
+            if (originalPos !== -1 && newPos !== -1) {
+                const newGroups = arrayMove([...prev.groups], originalPos, newPos)
+                return { ...prev, groups: newGroups }
+            }
+
+            return prev
+        })
+    }
 
     if (!board) return 'loading....'
     return (
@@ -139,26 +167,27 @@ export function BoardDetails(props) {
                 </div>
             </div>
 
-
-            {board.groups.map(group => (
-                <Group
-                    key={group.id}
-                    group={group}
-                    columns={board.columns}
-                    labels={board.labels}
-                    canRemoveGroup={board.groups?.length > 1}
-                    // group funcs
-                    onUpdateGroup={onUpdateGroup}
-                    onRemoveGroup={onRemoveGroup}
-                    // task funcs
-                    onAddTask={onAddTask}
-                    onRemoveTask={onRemoveTask}
-                    onUpdateTask={onUpdateTask}
-                />
-            ))}
+            <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}
+                strategy={verticalListSortingStrategy}>
+                <SortableContext items={board.groups} >
+                    <GroupList
+                        groups={board.groups}
+                        columns={board.columns}
+                        labels={board.labels}
+                        canRemoveGroup={board.groups?.length > 1}
+                        // group funcs
+                        onUpdateGroup={onUpdateGroup}
+                        onRemoveGroup={onRemoveGroup}
+                        // task funcs
+                        onAddTask={onAddTask}
+                        onRemoveTask={onRemoveTask}
+                        onUpdateTask={onUpdateTask}
+                    />
+                </SortableContext>
+            </DndContext >
 
             <button onClick={onAddGroup} className='add-goupe-btn'>+ Add New Group</button>
-        </section>
+        </section >
     )
 
 }

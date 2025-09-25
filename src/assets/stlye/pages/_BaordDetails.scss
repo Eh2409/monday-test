@@ -2,7 +2,6 @@
     position: relative;
     padding-block-end: 2em;
     background-color: white;
-
     height: 100%;
     overflow: auto;
 
@@ -22,6 +21,49 @@
         position: sticky;
         left: 30px;
         margin-inline-start: 30px;
+    }
+
+
+    .group-list {
+        &:has(.dragging) {
+
+            .group {
+
+                &>*:not(.group-header) {
+                    display: none;
+                }
+
+                .group-header {
+
+                    .group-title {
+                        outline: 1px solid #d0d4e4;
+                        height: 50px;
+                        flex-grow: 1;
+                        margin-inline-start: 30px;
+
+                        &:before {
+                            position: absolute;
+                            left: -6px;
+                            top: 0;
+                            content: "";
+                            width: 6px;
+                            height: 100%;
+                            background: var(--before-columns);
+                            border-radius: 10px 0 0 10px;
+                        }
+                    }
+
+                    .table-header {
+                        display: none;
+                    }
+
+                    .remove-btn-wrapper {
+                        display: none;
+                    }
+
+                }
+            }
+        }
     }
 
 }

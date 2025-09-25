@@ -1,8 +1,16 @@
+
+
+// dnd
+import { useSortable } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
+
+// cmps
 import { GroupTitleEditor } from "./group/GroupTitleEditor.jsx"
 import { StatusPicker } from "./group/StatusPicker.jsx"
 import { TaskNameEditor } from "./group/TaskNameEditor.jsx"
 
 export function Group({
+    id,
     group,
     columns,
     labels,
@@ -15,6 +23,15 @@ export function Group({
     onRemoveTask,
     onUpdateTask,
 }) {
+
+    const { attributes, listeners,
+        setNodeRef, transform, transition, isDragging } = useSortable({ id })
+
+
+    const style = {
+        transition,
+        transform: CSS.Transform.toString(transform)
+    }
 
     var columnsTitles = columns.map(col => col.title) || []
 
@@ -29,12 +46,18 @@ export function Group({
         onUpdateGroup(updatedGroup)
     }
 
+
     return (
-        <section className="group" style={{ '--before-columns': group.color }}>
+        <section className={`group  ${isDragging ? 'dragging' : ''}`}
+            style={{ '--before-columns': group.color, ...style }}
+            key={group.id}
+            ref={setNodeRef}
+            {...attributes}
+        >
 
             <div className="group-header">
 
-                <div className="group-title-wrapper">
+                <div className="group-title-wrapper flex">
                     <div className="group-title">
                         <div className="remove-btn-wrapper">
                             <button className="remove-btn"
@@ -49,6 +72,8 @@ export function Group({
                             color={group.color}
                             onSave={((newVals) => setGroupToUpdate(newVals, group))}
                         />
+
+                        <div className="group-grab" {...listeners}>grap</div>
                     </div>
                 </div>
 
