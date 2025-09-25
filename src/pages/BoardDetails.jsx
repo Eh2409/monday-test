@@ -148,6 +148,27 @@ export function BoardDetails(props) {
         })
     }
 
+
+    function updateTaskOrder(groupId, newTasksOder) {
+        setPrevBoard(board)
+        setBoard(prev => {
+            var newBoard = { ...prev }
+            if (newTasksOder && groupId) {
+                newBoard.groups = newBoard.groups.map(group => {
+                    if (group.id === groupId) {
+                        return {
+                            ...group,
+                            items: newTasksOder
+                        }
+                    } else {
+                        return group
+                    }
+                })
+            }
+            return newBoard
+        })
+    }
+
     if (!board) return 'loading....'
     return (
         <section className="board-details">
@@ -182,6 +203,7 @@ export function BoardDetails(props) {
                         onAddTask={onAddTask}
                         onRemoveTask={onRemoveTask}
                         onUpdateTask={onUpdateTask}
+                        updateTaskOrder={updateTaskOrder}
                     />
                 </SortableContext>
             </DndContext >

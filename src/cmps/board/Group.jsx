@@ -1,6 +1,8 @@
 
-
 // dnd
+import { closestCorners, DndContext } from "@dnd-kit/core"
+import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
+
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 
@@ -8,6 +10,7 @@ import { CSS } from "@dnd-kit/utilities"
 import { GroupTitleEditor } from "./group/GroupTitleEditor.jsx"
 import { StatusPicker } from "./group/StatusPicker.jsx"
 import { TaskNameEditor } from "./group/TaskNameEditor.jsx"
+import { Task } from "./Task.jsx"
 
 export function Group({
     id,
@@ -22,6 +25,7 @@ export function Group({
     onAddTask,
     onRemoveTask,
     onUpdateTask,
+    updateTaskOrder,
 }) {
 
     const { attributes, listeners,
@@ -44,6 +48,26 @@ export function Group({
     function setGroupToUpdate(newVals, group) {
         const updatedGroup = { ...group, ...newVals }
         onUpdateGroup(updatedGroup)
+    }
+
+
+    function getTaskIdx(taskId) {
+        const taskIdx = group?.items.findIndex(i => i.id === taskId)
+        return taskIdx
+    }
+
+    function handleDragEndTask(ev) {
+        const { active, over } = ev
+        if (!over) return
+        if (active.id === over.id) return
+
+        const originalPos = getTaskIdx(active.id)
+        const newPos = getTaskIdx(over.id)
+
+        const tasksCopy = structuredClone(group?.items)
+        const newTaskesOrder = arrayMove(tasksCopy, originalPos, newPos)
+
+        updateTaskOrder(group.id, newTaskesOrder)
     }
 
 
@@ -83,48 +107,34 @@ export function Group({
                         <div className="color-bar"></div>
                         <div className="cell name">Task</div>
                     </div>
+
                     {columnsTitles.map(colId => (
                         <div key={colId} className="cell">{colId}</div>
                     ))}
                     <div className="cell full"></div>
+
                 </div>
 
             </div>
 
 
             <div className="group-table">
-                {group.items.map(item => (
-                    <div key={item.id} className="table-row">
-                        <div className="task-bar">
-                            <div className="remove-btn-wrapper">
-                                <button className="remove-btn" onClick={() => onRemoveTask(group.id, item.id)}>
-                                    <span>X</span>
-                                </button>
-                            </div>
-                            <div className="white-block"></div>
-                            <div className="color-bar"></div>
-                            <div className="cell name">
-                                <TaskNameEditor name={item.name}
-                                    onSave={(taskName) => setTaskToUpdate(taskName, item, 'name')} />
-                            </div>
-                        </div>
-                        {columns.map(col => {
-                            const value = item[col.id]
-                            if (col.id === 'status') {
-                                return <div key={col.id} className="cell">
-                                    {DynamicCmp(col.id, value,
-                                        (newStatus) => setTaskToUpdate(newStatus, item, col.type),
-                                        labels
-                                    )}
-                                </div>
-                            } else {
-                                return <div key={col.id} className="cell">{value}</div>
-                            }
 
-                        })}
-                        < div className="cell full"></div>
-                    </div>
-                ))}
+                <DndContext onDragEnd={handleDragEndTask} collisionDetection={closestCorners}
+                    strategy={verticalListSortingStrategy}>
+                    <SortableContext items={group?.items} >
+                        {group.items.map(item => (
+                            <Task
+                                key={item.id}
+                                item={item}
+                                onRemoveTask={(itemId) => onRemoveTask(group.id, itemId)}
+                                setTaskToUpdate={setTaskToUpdate}
+                                labels={labels}
+                                columns={columns}
+                            />
+                        ))}
+                    </SortableContext>
+                </DndContext>
 
                 <div className="table-row">
                     <div className="task-bar">

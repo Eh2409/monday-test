@@ -12,7 +12,7 @@ export function GroupList({
     onAddTask,
     onRemoveTask,
     onUpdateTask,
-
+    updateTaskOrder,
 }) {
 
     return (
@@ -32,6 +32,7 @@ export function GroupList({
                     onAddTask={onAddTask}
                     onRemoveTask={onRemoveTask}
                     onUpdateTask={onUpdateTask}
+                    updateTaskOrder={updateTaskOrder}
                 />
             ))}
         </section>
