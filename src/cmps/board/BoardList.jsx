@@ -14,7 +14,7 @@ export function BoardList({ boards, isMenuDisplay = false }) {
                 return <li key={b._id}
                     className={`board-item ${boardId === b._id ? "active" : ""}`}
                     onClick={() => navigate(`/board/${b._id}`)}>
-                    {!isMenuDisplay && <img src="/images/board-img.svg" alt="board-img" />}
+                    {!isMenuDisplay && <img src="./images/board-img.svg" alt="board-img" />}
                     <div>{b.name}</div>
                 </li>
             })}
