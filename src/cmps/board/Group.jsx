@@ -81,25 +81,26 @@ export function Group({
 
             <div className="group-header">
 
-                <div className="group-title-wrapper flex">
-                    <div className="group-title">
-                        <div className="remove-btn-wrapper">
-                            <button className="remove-btn"
-                                disabled={!canRemoveGroup}
-                                onClick={() => onRemoveGroup(group.id)}>
-                                <span>X</span>
-                            </button>
-                        </div>
+                <div className="group-title">
 
-                        <GroupTitleEditor
-                            title={group.title}
-                            color={group.color}
-                            onSave={((newVals) => setGroupToUpdate(newVals, group))}
-                        />
-
-                        <div className="group-grab" {...listeners}>grap</div>
+                    <div className="remove-btn-wrapper">
+                        <button className="remove-btn"
+                            disabled={!canRemoveGroup}
+                            onClick={() => onRemoveGroup(group.id)}>
+                            <span>X</span>
+                        </button>
                     </div>
+
+                    <GroupTitleEditor
+                        title={group.title}
+                        color={group.color}
+                        onSave={((newVals) => setGroupToUpdate(newVals, group))}
+                    />
+
+                    <div className="group-grab" {...listeners}>grap</div>
                 </div>
+
+                <div className="white-block"></div>
 
                 <div className="table-row table-header">
                     <div className="task-bar">
@@ -108,10 +109,12 @@ export function Group({
                         <div className="cell name">Task</div>
                     </div>
 
-                    {columnsTitles.map(colId => (
-                        <div key={colId} className="cell">{colId}</div>
-                    ))}
-                    <div className="cell full"></div>
+                    <div className="task-columns">
+                        {columnsTitles.map(colId => (
+                            <div key={colId} className="cell">{colId}</div>
+                        ))}
+                        <div className="cell full"></div>
+                    </div>
 
                 </div>
 
@@ -144,9 +147,12 @@ export function Group({
                             <TaskNameEditor placeholder={"+ Add task"} onSave={(taskName) => onAddTask(taskName, group.id)} />
                         </div>
                     </div>
-                    <div className="cell full-line"></div>
+                    <div className="cell full"></div>
                 </div>
             </div>
+
+            <div className="group-end"></div>
+
         </section >
     )
 }

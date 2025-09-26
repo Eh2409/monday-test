@@ -34,6 +34,10 @@ export function BoardDetails(props) {
     }, [board])
 
 
+    function onAddTaskSocket(newTa) {
+        setBoard(newTa)
+    }
+
     async function getBoard(boardId) {
         try {
             const board = await boardService.getById(boardId)
@@ -191,6 +195,7 @@ export function BoardDetails(props) {
             <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}
                 strategy={verticalListSortingStrategy}>
                 <SortableContext items={board.groups} >
+
                     <GroupList
                         groups={board.groups}
                         columns={board.columns}
@@ -205,10 +210,12 @@ export function BoardDetails(props) {
                         onUpdateTask={onUpdateTask}
                         updateTaskOrder={updateTaskOrder}
                     />
+
                 </SortableContext>
             </DndContext >
 
             <button onClick={onAddGroup} className='add-goupe-btn'>+ Add New Group</button>
+
         </section >
     )
 
